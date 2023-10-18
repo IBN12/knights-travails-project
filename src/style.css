@@ -1,0 +1,58 @@
+/* body - The main body for the application. */
+body{
+    padding: 0;
+    margin: 0;
+}
+
+/* * - All elements on the browser. */
+*{
+    box-sizing: border-box;
+}
+
+/* Main Content */
+#content{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    border: 1px solid red;
+}
+
+/* Main Gameboard */
+.main-gameboard{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    border: 1px solid black;
+    padding: 10px;
+}
+.main-gameboard > div{ /* Rows */
+    display: flex;
+    gap: 5px;
+
+    border: 1px solid black; 
+    padding: 10px;
+}
+.cell{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;  
+}
+.white{
+    background-color: white;
+}
+.black{
+    background-color: black;
+}
+
+/* Main Gameboard Interface */
+.main-gameboard-interface{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 100px;
+
+    border: 1px solid black;
+}
+
