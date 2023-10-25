@@ -81,10 +81,14 @@ function CreateGameboardInterface(){
     const clearBtn = document.createElement('button');
     clearBtn.textContent = 'Clear';
 
+    const searchInProgress = document.createElement('div');
+    searchInProgress.textContent = "No Search In Progess";
+
     mainGameboardInterface.appendChild(startPointBtn);
     mainGameboardInterface.appendChild(endPointBtn);
     mainGameboardInterface.appendChild(travailBtn);
     mainGameboardInterface.appendChild(clearBtn);
+    mainGameboardInterface.appendChild(searchInProgress);
 
     content.appendChild(mainGameboardInterface);
 }
@@ -93,6 +97,8 @@ function CreateGameboardInterface(){
 function StartPoint(){
     console.log("Start Point Initiated"); // Testing
     const cells = document.querySelectorAll('.main-gameboard > div > div');
+    const startPointBtn = document.querySelector('.main-gameboard-interface > button:nth-child(1)');
+    startPointBtn.classList.add('button-clicked'); 
     
     cells.forEach((cell) => {
         cell.addEventListener('click', ChooseStartPoint);
@@ -131,10 +137,12 @@ function ChooseStartPoint(e){
 // EndPoint(): End point initiated. 
 function EndPoint(){
     const cells = document.querySelectorAll('.main-gameboard > div > div');
+    const endPointBtn = document.querySelector('.main-gameboard-interface > button:nth-child(2)');
 
     if (gameboard.startPointX !== null)
     {
         console.log("End Point Initiated"); 
+        endPointBtn.classList.add('button-clicked'); 
         cells.forEach((cell) => {
             cell.addEventListener('click', ChooseEndPoint);
         });
@@ -170,8 +178,11 @@ function ChooseEndPoint(e){
 
 // KnightMoves(): Commence moving the knight from the start point to the end point.
 function KnightTravails(){
+    const travailBtn = document.querySelector('.main-gameboard-interface > button:nth-child(3)');
+
     if (gameboard.startPointX !== null && gameboard.endPointX !== null)
     {
+        travailBtn.classList.add('button-clicked'); 
         knightMoves([parseInt(gameboard.startPointX), parseInt(gameboard.startPointY)], [parseInt(gameboard.endPointX), parseInt(gameboard.endPointY)]);
     }
     else
@@ -184,12 +195,17 @@ function KnightTravails(){
 // ClearBoard(): Clear the board.
 function ClearBoard(){
     const cells = document.querySelectorAll('.main-gameboard > div > div');
+    const mainGameboardInterface = document.querySelectorAll('.main-gameboard-interface > button')
     gameboard.resetGameboard(); // Reset all the key properties in gameboard. 
 
     cells.forEach((cell) => {
         cell.replaceChildren(); // Removes all child nodes from the gameboard cell. 
         cell.classList.remove('start-point'); 
         cell.classList.remove('end-point');
+    });
+
+    mainGameboardInterface.forEach((btn) => {
+        btn.classList.remove('button-clicked'); 
     });
 }
 
