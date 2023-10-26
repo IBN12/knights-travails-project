@@ -5,7 +5,7 @@ A knight in chess can move to any square on the standard 8x8 chess board from an
 other square on the board, given enough turns. Its basic move is two steps forward and one step
 to the side. It can face any direction. 
 
-The task is to build function **knightMoves that shows the shortest possible way to get from one square
+The task is to build function **knightMoves** that shows the shortest possible way to get from one square
 to another by outputting all squares the knight will stop on along the way. 
 
 You can think of the board as having 2-dimensional coordinates. Your funciton would therefore look like:
@@ -22,7 +22,7 @@ This project uses a queue data structure with an algorithm thats similar to the 
 for binary search trees. The **startPoint will be the predecessor in the queue that will be calculated amongst
 all 8 possible default knight moves on the board. 
 
-// All possible default knight moves:
+// All possible default knight moves:<br />
 const KNIGHT_MOVES = [
     [1, 2], [1, -2],
     [2, 1], [2, -1],
@@ -33,14 +33,13 @@ const KNIGHT_MOVES = [
 Each calculation from the current predecessor will be stored in data object map and placed in the in the back of the
 queue. Each new piece of data stored in the queue will be taken off from the top of queue when its first in line and
 also calculated amongst all the possible default knight moves. This is in turn will also make each piece of data its 
-own predecessor until the algorithm finds the intended **endPoint target from the calculations being stored in the
+own predecessor until the algorithm finds the intended **endPoint** target from the calculations being stored in the
 object map. 
 
-const queue = [knightStartPoint];
-while (!queue.includes(knightEndPoint))
-{
+
+const queue = [knightStartPoint];<br />
+while (!queue.includes(knightEndPoint)){
     const currentSquare = queue.shift();
-    
     const enqueueList = currentSquare.possibleKnightMoves();
     enqueueList.forEach((square) => square.setPredecessor(currentSquare));
     queue.push(...enqueueList);
