@@ -53,3 +53,8 @@ while (!queue.includes(knightEndPoint)){
 ## Quick Summary
 * Each predecessor is a level in breadth-first - level-order traversal
 * Each x and y coordinate in the square will be added to the queue from its predecessor level. 
+
+<img src="./src/images/odin-knights-travails-project.png">
+
+## Live Demo 
+[Knights Travails Project](https://ibn12.github.io/knights-travails-project/) 
