@@ -37,7 +37,8 @@ own predecessor until the algorithm finds the intended **endPoint** target from 
 object map. 
 
 
-const queue = [knightStartPoint];<br />
+const queue = [knightStartPoint];
+
 while (!queue.includes(knightEndPoint)){
 
     const currentSquare = queue.shift();
@@ -45,7 +46,7 @@ while (!queue.includes(knightEndPoint)){
     const enqueueList = currentSquare.possibleKnightMoves();
 
     enqueueList.forEach((square) => square.setPredecessor(currentSquare));
-    
+
     queue.push(...enqueueList);
 }
 
