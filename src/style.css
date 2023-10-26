@@ -16,13 +16,21 @@ body{
     src: url('../src/fonts/rock-inline/Rockinline.ttf');
 }
 
+/* Knights Travails Header */
+h1{
+    text-align: center;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    letter-spacing: 3px;
+    font-size: 40px;
+}
+
 /* Main Content */
 #content{
     display: flex;
     justify-content: center;
     gap: 10px;
 
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 /* Main Gameboard */
@@ -62,7 +70,7 @@ body{
     gap: 30px;
 
     padding: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 .main-gameboard-interface > button{
     cursor: pointer;
@@ -71,7 +79,9 @@ body{
     border: 1px solid rgba(0, 0, 0, 0);
     background-color: white;
     font-size: 20px;
-    font-family: rockinline;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 .main-gameboard-interface > button:hover{
     background-color:lightskyblue;
@@ -81,7 +91,7 @@ body{
 .main-gameboard-interface > div{
     border: 1px solid #cbd5e1;
     border-radius: 10px;
-    font-family: rockinline;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 18px;
     padding: 10px;
 }

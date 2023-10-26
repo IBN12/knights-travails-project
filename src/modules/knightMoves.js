@@ -10,6 +10,7 @@ const chessSquare = (x, y) => {
     console.log("Chess Square Initiated..."); // Testing 
     console.log("X Position: ", xPosition); // Testing 
     console.log("Y Position: ", yPosition); // Testing 
+    console.log("\n"); // Testing 
 
     // All possible default knight moves:
     const KNIGHT_MOVES = [
@@ -61,7 +62,7 @@ const chessSquare = (x, y) => {
 // knightMoves(): Will move the knight to the end point. 
 export const knightMoves = (startPoint, endPoint) =>{
     squareRegistry.clear();
-
+  
     console.log("Knight Moves Initiated..."); // Testing
     console.log("Start Point: ", startPoint); // Testing
     console.log("End Point: ", endPoint); // Testing
@@ -71,50 +72,26 @@ export const knightMoves = (startPoint, endPoint) =>{
     const knightEndPoint = chessSquare(...endPoint); 
 
     const queue = [knightStartPoint]; 
-    console.log("Queue: ", queue); // Testing
-    console.log("\n"); // Testing 
 
     while(!queue.includes(knightEndPoint))
     {
         const currentSquare = queue.shift();
-        // Testing: Testing The Queue:
-        queue.forEach((data) => {
-            console.log("Data inside queue: ", data.name());
-        });
-        console.log("Current Square: ", currentSquare.name()); // Testing
+        console.log("Current Square: ", currentSquare.name()); // Testing 
         
         const enqueueList = currentSquare.possibleKnightMoves();
-        console.log("The New Enqueue List: ", enqueueList);  // Testing 
+        console.log("Enqueue List: ", enqueueList); // Testing
         enqueueList.forEach((square) => square.setPredecessor(currentSquare));
         queue.push(...enqueueList);
     }
-    console.log("\n"); // Testing 
-
-    console.log("----------------------------------------------------") // Testing
-    console.log("Data inside in the queue after:");
-    queue.forEach((data) => {
-        console.log("Data inside: ", data.name()); // Testing
-    });
-    console.log("----------------------------------------------------"); // Testing
-    console.log("\n"); // Testing
 
     const path = [knightEndPoint];
-    console.log("Path: ", path); 
-    path.forEach((data) => {
-        console.log("End Point: ", data.name()); // Testing
-    });
-    console.log("\n"); // Testing
-
-    console.log("Finding the predecessor paths: "); // Testing
     while (!path.includes(knightStartPoint))
     {
         const previousSquare = path[0].getPredecessor();
         path.unshift(previousSquare); 
-        console.log(previousSquare.name()); // Testing
     }
-    console.log("\n"); // Testing 
 
-    console.log("Displaying the square paths"); // Testing 
+    console.log("Displaying the predecessor paths:"); // Testing 
     let squareCoord = [];
     path.forEach((square) => {
         console.log("The Square: ", square.name());

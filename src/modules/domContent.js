@@ -10,15 +10,10 @@ function CreateGameboard(){
     const mainGameboard = document.createElement('div');
     mainGameboard.classList.add('main-gameboard');
 
-    // const mainGameboardInterface = document.createElement('div');
-    // mainGameboardInterface.classList.add('main-gameboard-interface');
-
     const board = gameboard.createGameboard();
-    console.log("Gameboard: ", board); // Testing
 
     for (let i = 0; i < board.length; i++)
     {
-        console.log("Each row: ",board[i]); // Testing
         const row = document.createElement('div'); 
 
         for (let j = 0; j < board[i].length; j++)
@@ -82,7 +77,7 @@ function CreateGameboardInterface(){
     clearBtn.textContent = 'Clear';
 
     const searchInProgress = document.createElement('div');
-    searchInProgress.textContent = "No Search In Progess";
+    searchInProgress.textContent = "No Search In Progress";
 
     mainGameboardInterface.appendChild(startPointBtn);
     mainGameboardInterface.appendChild(endPointBtn);
@@ -97,22 +92,30 @@ function CreateGameboardInterface(){
 function StartPoint(){
     console.log("Start Point Initiated"); // Testing
     const cells = document.querySelectorAll('.main-gameboard > div > div');
+    const searchInProgress = document.querySelector('.main-gameboard-interface > div');
     const startPointBtn = document.querySelector('.main-gameboard-interface > button:nth-child(1)');
     startPointBtn.classList.add('button-clicked'); 
-    
-    cells.forEach((cell) => {
-        cell.addEventListener('click', ChooseStartPoint);
-    });
+
+    if (searchInProgress.textContent !== 'Search Complete')
+    {
+        cells.forEach((cell) => {
+            cell.addEventListener('click', ChooseStartPoint);
+        });
+    }
+    else
+    {
+        console.log("Please clear the board before choosing a new start point."); // Testing
+        console.log("\n"); // Testing 
+    }
 }
 
 // ChooseStartPoint(): Choose the start point on the gameboard.
 function ChooseStartPoint(e){
-    console.log("Target: ", e.target); // Testing
     console.log("Start Point X: ", e.target.dataset.x); // Testing
     console.log("Start Point Y: ", e.target.dataset.y); // Testing
+    console.log("\n"); // Testing 
 
     const startPoint = document.querySelector(`[data-x="${e.target.dataset.x}"][data-y="${e.target.dataset.y}"]`); 
-    console.log("First way to expose the start point: ", startPoint); // Testing
 
     startPoint.classList.add('start-point');
     const knightPieceContainer = document.createElement('img');
@@ -122,10 +125,6 @@ function ChooseStartPoint(e){
 
     gameboard.startPointX = e.target.dataset.x;
     gameboard.startPointY = e.target.dataset.y;
-
-    const startPointTwo = e.target;
-    console.log("Second way to expose the start point: ", startPointTwo); // Testing
-    console.log("\n"); // Testing 
 
     const cells = document.querySelectorAll('.main-gameboard > div > div');
     // Remove the event once the start point is choosen. 
@@ -138,14 +137,23 @@ function ChooseStartPoint(e){
 function EndPoint(){
     const cells = document.querySelectorAll('.main-gameboard > div > div');
     const endPointBtn = document.querySelector('.main-gameboard-interface > button:nth-child(2)');
+    const searchInProgress = document.querySelector('.main-gameboard-interface > div');
 
     if (gameboard.startPointX !== null)
     {
         console.log("End Point Initiated"); 
-        endPointBtn.classList.add('button-clicked'); 
-        cells.forEach((cell) => {
-            cell.addEventListener('click', ChooseEndPoint);
-        });
+        if (searchInProgress.textContent !== 'Search Complete')
+        {
+            endPointBtn.classList.add('button-clicked'); 
+            cells.forEach((cell) => {
+                cell.addEventListener('click', ChooseEndPoint);
+            });
+        }
+        else
+        {
+            console.log("Please clear the board before choosing a new end point."); // Testing
+            console.log("\n"); // Testing 
+        }
     }
     else
     {
@@ -156,13 +164,11 @@ function EndPoint(){
 
 // ChooseEndPoint(): Choose the end point on the gameboard. 
 function ChooseEndPoint(e){
-    console.log("Target: ", e.target); // Testing
     console.log("End Point X: ", e.target.dataset.x); // Testing
     console.log("End Point Y: ", e.target.dataset.y); // Testing
+    console.log("\n"); // Testing 
     
     const endPoint = document.querySelector(`[data-x="${e.target.dataset.x}"][data-y="${e.target.dataset.y}"]`);
-    console.log("The End Point: ", endPoint); // Testing
-    console.log("\n"); // Testing 
 
     endPoint.classList.add('end-point');
 
@@ -179,11 +185,22 @@ function ChooseEndPoint(e){
 // KnightMoves(): Commence moving the knight from the start point to the end point.
 function KnightTravails(){
     const travailBtn = document.querySelector('.main-gameboard-interface > button:nth-child(3)');
+    const searchInProgress = document.querySelector('.main-gameboard-interface > div');
 
     if (gameboard.startPointX !== null && gameboard.endPointX !== null)
     {
-        travailBtn.classList.add('button-clicked'); 
-        knightMoves([parseInt(gameboard.startPointX), parseInt(gameboard.startPointY)], [parseInt(gameboard.endPointX), parseInt(gameboard.endPointY)]);
+        if (searchInProgress.textContent !== 'Search Complete')
+        {
+            searchInProgress.textContent = 'Search In Progress';
+            searchInProgress.setAttribute('style', 'background-color: #fdba74; border: 1px solid #fdba74;');
+            travailBtn.classList.add('button-clicked'); 
+            knightMoves([parseInt(gameboard.startPointX), parseInt(gameboard.startPointY)], [parseInt(gameboard.endPointX), parseInt(gameboard.endPointY)]);
+        }
+        else 
+        {
+            console.log("Please clear the board for a new travail."); // Testing
+            console.log('\n'); // Testing 
+        }
     }
     else
     {
@@ -196,6 +213,10 @@ function KnightTravails(){
 function ClearBoard(){
     const cells = document.querySelectorAll('.main-gameboard > div > div');
     const mainGameboardInterface = document.querySelectorAll('.main-gameboard-interface > button')
+    const searchInProgress = document.querySelector('.main-gameboard-interface > div');
+    searchInProgress.textContent = "No Search In Progress";
+    searchInProgress.removeAttribute('style'); 
+
     gameboard.resetGameboard(); // Reset all the key properties in gameboard. 
 
     cells.forEach((cell) => {

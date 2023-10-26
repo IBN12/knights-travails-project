@@ -2,14 +2,13 @@ import knightPiece from '../images/black-knight.png';
 
 // displayMoves(): Displays the moves from start point to end point
 export const displayMoves = (squareCoord) =>{
-    console.log("displaying Moves: ", squareCoord); // Testing
-
     const cells = document.querySelectorAll('.main-gameboard > div > div'); 
+
     const startPoint = document.querySelector('.start-point');
-    console.log(`Start Point: ${startPoint.dataset.x}, ${startPoint.dataset.y}`); // Testing
+
     const endPoint = document.querySelector('.end-point'); 
-    console.log(`End Point: ${endPoint.dataset.x}, ${endPoint.dataset.y}`); // Testing
-    console.log("\n"); // Testing
+
+    const searchInProgress = document.querySelector('.main-gameboard-interface > div');
 
     let timer = 100;
 
@@ -17,8 +16,6 @@ export const displayMoves = (squareCoord) =>{
         cells.forEach((cell) => {
             if (`${cell.dataset.x}, ${cell.dataset.y}` === square)
             {
-                console.log(`${cell.dataset.x}, ${cell.dataset.y}`); // Testing
-
                 if (`${startPoint.dataset.x}, ${startPoint.dataset.y}` === `${cell.dataset.x}, ${cell.dataset.y}`)
                 {
                     cell.replaceChildren(); // Remove the original start-point so it doesn't conflict the travailing start point. 
@@ -29,7 +26,13 @@ export const displayMoves = (squareCoord) =>{
                     const knightPieceContainer = document.createElement('img');
                     knightPieceContainer.classList.add('knight-piece-container');
                     knightPieceContainer.src = knightPiece;
-                    cell.appendChild(knightPieceContainer); 
+                    cell.appendChild(knightPieceContainer);
+                    
+                    if (`${endPoint.dataset.x}, ${endPoint.dataset.y}` === `${cell.dataset.x}, ${cell.dataset.y}`)
+                    {
+                        searchInProgress.textContent = "Search Complete";
+                        searchInProgress.setAttribute('style', 'background-color: #a3e635; border: 1px solid #a3e635;');
+                    }
                 }, timer);
 
                 timer += 250;
