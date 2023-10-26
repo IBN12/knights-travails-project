@@ -39,9 +39,13 @@ object map.
 
 const queue = [knightStartPoint];<br />
 while (!queue.includes(knightEndPoint)){
+
     const currentSquare = queue.shift();
+
     const enqueueList = currentSquare.possibleKnightMoves();
+
     enqueueList.forEach((square) => square.setPredecessor(currentSquare));
+    
     queue.push(...enqueueList);
 }
 
