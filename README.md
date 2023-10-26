@@ -19,7 +19,7 @@ on the gameboard.
 
 ## The Algorithm
 This project uses a queue data structure with an algorithm thats similar to the breadth-first - level-order traversal 
-for binary search trees. The **startPoint will be the predecessor in the queue that will be calculated amongst
+for binary search trees. The **startPoint** will be the predecessor in the queue that will be calculated amongst
 all 8 possible default knight moves on the board. 
 
 // All possible default knight moves:<br />
